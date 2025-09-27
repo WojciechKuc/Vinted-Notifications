@@ -89,7 +89,13 @@ class Requester:
         proxy_configured = proxies.configure_proxy(self.session)
         if self.debug and proxy_configured:
             logger.debug(f"Using proxy: {self.session.proxies}")
-
+        # Ustaw nagłówki przeglądarkowe
+            self.session.headers.update({
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+                "Accept": "application/json",
+                "Accept-Language": "pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7",
+                "Referer": "https://www.vinted.pl/"
+            })
         tried = 0
         new_session = False
         while tried < self.MAX_RETRIES:
